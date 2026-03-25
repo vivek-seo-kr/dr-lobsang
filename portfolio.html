@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolma Memorial Clinic | Traditional Tibetan Medicine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            blue: '#0ea5e9',
+                            dark: '#0f172a',
+                            light: '#f0f9ff',
+                            bg: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .bg-medical-bg { background-color: #f8fafc; }
+        .bg-medical-dark { background-color: #0f172a; }
+        .bg-medical-blue { background-color: #0ea5e9; }
+        .bg-medical-light { background-color: #f0f9ff; }
+        .text-medical-blue { color: #0ea5e9; }
+        .text-medical-dark { color: #0f172a; }
+        .border-medical-blue\/20 { border-color: rgba(14, 165, 233, 0.2); }
+        .shadow-medical-blue\/20 { shadow-color: rgba(14, 165, 233, 0.2); }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 bg-medical-bg" x-data="{ isMenuOpen: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
+
+    <!-- Top Bar -->
+    <div class="bg-medical-dark text-white py-2 px-4 text-sm hidden md:block">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex gap-6">
+                <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5"></i> 075900 32466</span>
+                <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Dolma Chowk, McLeod Ganj</span>
+            </div>
+            <div class="flex gap-4">
+                <span>Mon - Sat: 9:00 AM - 5:00 PM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 w-full z-50 transition-all duration-300 px-4 py-4" 
+         :class="scrolled ? 'bg-white shadow-md' : 'bg-white/90 backdrop-blur-sm'">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-medical-blue rounded-lg flex items-center justify-center text-white shadow-lg">
+                    <i data-lucide="heart-pulse" class="w-7 h-7"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold text-medical-dark leading-none">Dolma Memorial Clinic</span>
+                    <span class="text-[10px] uppercase tracking-widest text-medical-blue font-bold mt-1">Traditional Tibetan Medicine</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center gap-8 text-sm font-bold uppercase tracking-wide text-gray-700">
+                <a href="#home" class="hover:text-medical-blue transition-colors">Home</a>
+                <a href="#about" class="hover:text-medical-blue transition-colors">About</a>
+                <a href="#services" class="hover:text-medical-blue transition-colors">Services</a>
+                <a href="#gallery" class="hover:text-medical-blue transition-colors">Gallery</a>
+                <a href="#faqs" class="hover:text-medical-blue transition-colors">FAQs</a>
+                <a href="#contact" class="hover:text-medical-blue transition-colors">Contact</a>
+                <a href="tel:07590032466" class="bg-medical-blue text-white px-8 py-3 rounded-lg hover:bg-medical-dark transition-all shadow-lg shadow-medical-blue/20">Consult Now</a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="lg:hidden p-2 text-medical-dark" @click="isMenuOpen = !isMenuOpen">
+                <i data-lucide="menu" x-show="!isMenuOpen"></i>
+                <i data-lucide="x" x-show="isMenuOpen" x-cloak></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div x-show="isMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="absolute top-full left-0 w-full bg-white shadow-xl p-8 flex flex-col gap-6 lg:hidden border-t border-gray-100" x-cloak>
+            <a href="#home" @click="isMenuOpen = false" class="text-lg font-bold text-gray-800">Home</a>
+            <a href="#about" @click="isMenuOpen = false" class="text-lg font-bold text-gray-800">About</a>
+            <a href="#services" @click="isMenuOpen = false" class="text-lg font-bold text-gray-800">Services</a>
+            <a href="#gallery" @click="isMenuOpen = false" class="text-lg font-bold text-gray-800">Gallery</a>
+            <a href="#faqs" @click="isMenuOpen = false" class="text-lg font-bold text-gray-800">FAQs</a>
+            <a href="#contact" @click="isMenuOpen = false" class="text-lg font-bold text-gray-800">Contact</a>
+            <a href="tel:07590032466" class="bg-medical-blue text-white text-center py-4 rounded-lg font-bold">Call: 075900 32466</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[90vh] flex items-center bg-white overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-medical-blue/5 -skew-x-12 translate-x-1/4 hidden lg:block"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-medical-light rounded-full blur-3xl opacity-50"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10 py-20">
+            <div>
+                <div class="inline-flex items-center gap-2 bg-medical-light text-medical-blue px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8 border border-medical-blue/20">
+                    <span class="w-2 h-2 bg-medical-blue rounded-full animate-pulse"></span>
+                    Trusted Medical Care in Dharamshala
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-medical-dark mb-8 leading-[1.1]">
+                    Authentic <br>
+                    <span class="text-medical-blue">Tibetan Medicine</span> <br>
+                    for Your Wellbeing
+                </h1>
+                <p class="text-xl text-gray-600 max-w-xl mb-12 leading-relaxed">
+                    Experience the ancient wisdom of Sowa Rigpa. We continue the legacy of Dr. Lobsang Dolma Khangkar with personalized herbal treatments and holistic healing.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#contact" class="bg-medical-blue text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-medical-dark transition-all shadow-2xl shadow-medical-blue/30 flex items-center justify-center gap-2 group">
+                        Book Appointment 
+                        <i data-lucide="chevron-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#services" class="bg-white text-medical-dark border-2 border-gray-100 px-10 py-5 rounded-xl text-lg font-bold hover:border-medical-blue/30 hover:bg-medical-light/30 transition-all flex items-center justify-center">
+                        Explore Services
+                    </a>
+                </div>
+                
+                <div class="mt-16 flex flex-wrap items-center gap-10">
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-black text-medical-dark">4.8</span>
+                        <div class="flex text-yellow-400 my-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <span class="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em]">Google Rating</span>
+                    </div>
+                    <div class="w-[1px] h-12 bg-gray-200 hidden sm:block"></div>
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-black text-medical-dark">40+</span>
+                        <span class="text-medical-blue font-bold text-lg">Years</span>
+                        <span class="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em]">Of Legacy</span>
+                    </div>
+                    <div class="w-[1px] h-12 bg-gray-200 hidden sm:block"></div>
+                    <div class="flex flex-col">
+                        <span class="text-4xl font-black text-medical-dark">10k+</span>
+                        <span class="text-medical-blue font-bold text-lg">Patients</span>
+                        <span class="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em]">Healed Globally</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="relative z-10 rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_-12px_rgba(0,0,0,0.15)] border-[12px] border-white">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweqyTQOTAd4zFfilt__7PDVNBbtAKYi4elekhv3Bv8aTH9_hHu3kU6KBmQ9NpBxs0sPD1H07Q41WEsTJrYrAZn3Qah5fIr2r3M9Dvv-z3X3GMbiayTN4k0IiISrZRreEwzGh9zyenA=s1360-w1360-h1020-rw" 
+                         alt="Clinic Interior" 
+                         class="w-full aspect-[4/5] object-cover"
+                         referrerpolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-medical-dark/40 to-transparent"></div>
+                </div>
+                
+                <!-- Floating Card -->
+                <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-2xl z-20 border border-gray-100 max-w-[240px] animate-bounce-slow">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-600">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-medical-dark text-sm">Live Status</div>
+                            <div class="text-[10px] text-emerald-600 font-bold uppercase flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-pulse"></span>
+                                Open Now
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 leading-relaxed">Our doctors are currently available for consultations.</p>
+                </div>
+
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-medical-blue/10 rounded-full -z-10 blur-2xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-24 px-6 bg-medical-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-medical-light rounded-2xl flex items-center justify-center text-medical-blue mb-6">
+                        <i data-lucide="microscope" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-medical-dark mb-3">Expert Doctors</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">Highly qualified practitioners with decades of experience in Sowa Rigpa.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-medical-light rounded-2xl flex items-center justify-center text-medical-blue mb-6">
+                        <i data-lucide="leaf" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-medical-dark mb-3">Authentic Medicine</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">Pure Himalayan herbs processed using traditional pharmacological methods.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-medical-light rounded-2xl flex items-center justify-center text-medical-blue mb-6">
+                        <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-medical-dark mb-3">Holistic Approach</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">We treat the whole person—body, mind, and spirit—not just the symptoms.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-medical-light rounded-2xl flex items-center justify-center text-medical-blue mb-6">
+                        <i data-lucide="star" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-medical-dark mb-3">Patient Centric</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">Personalized care and attention for every patient who walks through our doors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div class="max-w-2xl">
+                    <div class="text-medical-blue font-bold uppercase tracking-[0.2em] text-xs mb-4">Our Expertise</div>
+                    <h2 class="text-4xl md:text-5xl font-black text-medical-dark mb-6">Specialized Medical Services</h2>
+                    <p class="text-gray-500 text-lg">We combine traditional Tibetan medical knowledge with modern standards of care to provide the best possible outcomes for our patients.</p>
+                </div>
+                <a href="#contact" class="text-medical-blue font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                    View All Services <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Pulse Diagnosis -->
+                <div class="group p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-2xl transition-all hover:border-medical-blue/10">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform group-hover:scale-110 bg-blue-50 text-blue-600">
+                        <i data-lucide="heart-pulse" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-medical-dark mb-4">Pulse Diagnosis</h3>
+                    <p class="text-gray-500 leading-relaxed mb-8">The core of Tibetan medicine, identifying imbalances through the subtle rhythms of the pulse.</p>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-medical-blue font-bold text-sm group-hover:gap-3 transition-all">Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+                </div>
+                <!-- Herbal Remedies -->
+                <div class="group p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-2xl transition-all hover:border-medical-blue/10">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform group-hover:scale-110 bg-emerald-50 text-emerald-600">
+                        <i data-lucide="leaf" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-medical-dark mb-4">Herbal Remedies</h3>
+                    <p class="text-gray-500 leading-relaxed mb-8">Custom-formulated herbal pills and powders made from high-altitude Himalayan plants.</p>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-medical-blue font-bold text-sm group-hover:gap-3 transition-all">Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+                </div>
+                <!-- Dietary Guidance -->
+                <div class="group p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-2xl transition-all hover:border-medical-blue/10">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform group-hover:scale-110 bg-amber-50 text-amber-600">
+                        <i data-lucide="history" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-medical-dark mb-4">Dietary Guidance</h3>
+                    <p class="text-gray-500 leading-relaxed mb-8">Personalized nutritional advice based on your unique constitution and elemental balance.</p>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-medical-blue font-bold text-sm group-hover:gap-3 transition-all">Learn More <i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 bg-medical-light overflow-hidden relative">
+        <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent"></div>
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-2 lg:order-1">
+                <div class="text-medical-blue font-bold uppercase tracking-[0.2em] text-xs mb-4">Our Legacy</div>
+                <h2 class="text-4xl md:text-5xl font-black text-medical-dark mb-8 leading-tight">
+                    Honoring the Tradition of <br>
+                    <span class="text-medical-blue">Dr. Lobsang Dolma Khangkar</span>
+                </h2>
+                <p class="text-lg text-gray-600 mb-10 leading-relaxed">
+                    Dr. Lobsang Dolma Khangkar was the first woman to become a physician in the Tibetan tradition of Sowa Rigpa. Her life's work was dedicated to preserving this ancient healing science and making it accessible to the world.
+                </p>
+                
+                <div class="grid sm:grid-cols-2 gap-8 mb-12">
+                    <div class="p-6 bg-white rounded-2xl shadow-sm border border-medical-blue/5">
+                        <div class="w-10 h-10 bg-medical-light rounded-xl flex items-center justify-center text-medical-blue mb-4">
+                            <i data-lucide="history" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-bold text-medical-dark mb-2">40+ Years Legacy</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">Preserving authentic Tibetan medical wisdom since the 1970s.</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow-sm border border-medical-blue/5">
+                        <div class="w-10 h-10 bg-medical-light rounded-xl flex items-center justify-center text-medical-blue mb-4">
+                            <i data-lucide="leaf" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-bold text-medical-dark mb-2">100% Natural</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">All medicines are prepared from pure Himalayan herbs and minerals.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-8 p-8 bg-medical-blue rounded-[2rem] text-white shadow-xl shadow-medical-blue/20">
+                    <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+                        <i data-lucide="clock" class="w-10 h-10"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1">Clinic Timing</h4>
+                        <p class="text-white/80 text-sm mb-2">We are open for consultations during these hours:</p>
+                        <div class="flex gap-4 font-bold text-sm">
+                            <span class="bg-white/10 px-3 py-1 rounded-lg">Mon - Sat</span>
+                            <span class="bg-white/10 px-3 py-1 rounded-lg">9 AM - 5 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2 relative">
+                <div class="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweo9cMkw6sUKf3xlJZCPj8EchyIBTWHGSP8Yh5uI-siOrz0nGFLAArfdBs9Mc84QtlaIm2bZKwZnZtgFP7OJOKeCaL7kOlBigGJu0zLpJW3DZf0fX5cE7A3YoT3Jj5lRQKMOTbfEiw=s1360-w1360-h1020-rw" 
+                         alt="Dr. Dolma Legacy" 
+                         class="w-full h-full object-cover"
+                         referrerpolicy="no-referrer">
+                </div>
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-medical-blue/10 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-medical-blue/10 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-2xl z-20 border border-gray-100 text-center">
+                    <div class="text-5xl font-black text-medical-blue mb-1">1st</div>
+                    <div class="text-[10px] uppercase font-black tracking-[0.2em] text-gray-400">Female Tibetan Physician</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="text-medical-blue font-bold uppercase tracking-[0.2em] text-xs mb-4">Our Clinic</div>
+                <h2 class="text-4xl md:text-5xl font-black text-medical-dark mb-6">Visual Tour</h2>
+                <div class="w-20 h-1.5 bg-medical-blue mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800&h=600" alt="Traditional Herbal Pharmacy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-medical-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div class="text-white">
+                            <h4 class="font-bold text-lg">Traditional Herbal Pharmacy</h4>
+                            <p class="text-xs text-white/70 uppercase tracking-widest mt-1">View Details</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800&h=600" alt="Himalayan Medicinal Source" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-medical-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div class="text-white">
+                            <h4 class="font-bold text-lg">Himalayan Medicinal Source</h4>
+                            <p class="text-xs text-white/70 uppercase tracking-widest mt-1">View Details</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&q=80&w=800&h=600" alt="Tibetan Healing Rituals" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-medical-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div class="text-white">
+                            <h4 class="font-bold text-lg">Tibetan Healing Rituals</h4>
+                            <p class="text-xs text-white/70 uppercase tracking-widest mt-1">View Details</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=800&h=600" alt="Authentic Sowa Rigpa Herbs" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-medical-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div class="text-white">
+                            <h4 class="font-bold text-lg">Authentic Sowa Rigpa Herbs</h4>
+                            <p class="text-xs text-white/70 uppercase tracking-widest mt-1">View Details</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800&h=600" alt="Holistic Consultation" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-medical-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div class="text-white">
+                            <h4 class="font-bold text-lg">Holistic Consultation</h4>
+                            <p class="text-xs text-white/70 uppercase tracking-widest mt-1">View Details</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800&h=600" alt="Mind-Body Balance" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-medical-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div class="text-white">
+                            <h4 class="font-bold text-lg">Mind-Body Balance</h4>
+                            <p class="text-xs text-white/70 uppercase tracking-widest mt-1">View Details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faqs" class="py-24 px-6 bg-white" x-data="{ activeFaq: null }">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-medical-dark mb-4">Frequently Asked Questions</h2>
+                <div class="w-20 h-1.5 bg-medical-blue mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all hover:border-medical-blue/30">
+                    <button @click="activeFaq = activeFaq === 0 ? null : 0" class="w-full p-5 flex justify-between items-center text-left">
+                        <span class="text-lg font-semibold text-medical-dark">What is Sowa Rigpa?</span>
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center transition-all" :class="activeFaq === 0 ? 'bg-medical-blue text-white' : 'bg-medical-light text-medical-blue'">
+                            <i data-lucide="plus" x-show="activeFaq !== 0" class="w-4 h-4"></i>
+                            <i data-lucide="minus" x-show="activeFaq === 0" class="w-4 h-4" x-cloak></i>
+                        </div>
+                    </button>
+                    <div x-show="activeFaq === 0" class="p-5 pt-0 text-gray-600 leading-relaxed border-t border-gray-100" x-cloak>
+                        Sowa Rigpa, or Tibetan Medicine, is an ancient science of healing that balances the body's three humors (Wind, Bile, and Phlegm) through diet, lifestyle, and herbal treatments.
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all hover:border-medical-blue/30">
+                    <button @click="activeFaq = activeFaq === 1 ? null : 1" class="w-full p-5 flex justify-between items-center text-left">
+                        <span class="text-lg font-semibold text-medical-dark">How does pulse diagnosis work?</span>
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center transition-all" :class="activeFaq === 1 ? 'bg-medical-blue text-white' : 'bg-medical-light text-medical-blue'">
+                            <i data-lucide="plus" x-show="activeFaq !== 1" class="w-4 h-4"></i>
+                            <i data-lucide="minus" x-show="activeFaq === 1" class="w-4 h-4" x-cloak></i>
+                        </div>
+                    </button>
+                    <div x-show="activeFaq === 1" class="p-5 pt-0 text-gray-600 leading-relaxed border-t border-gray-100" x-cloak>
+                        The physician places three fingers on each of your wrists to feel the subtle rhythms of your pulse, which reveals the state of your internal organs and elemental balance.
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all hover:border-medical-blue/30">
+                    <button @click="activeFaq = activeFaq === 2 ? null : 2" class="w-full p-5 flex justify-between items-center text-left">
+                        <span class="text-lg font-semibold text-medical-dark">Are the medicines natural?</span>
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center transition-all" :class="activeFaq === 2 ? 'bg-medical-blue text-white' : 'bg-medical-light text-medical-blue'">
+                            <i data-lucide="plus" x-show="activeFaq !== 2" class="w-4 h-4"></i>
+                            <i data-lucide="minus" x-show="activeFaq === 2" class="w-4 h-4" x-cloak></i>
+                        </div>
+                    </button>
+                    <div x-show="activeFaq === 2" class="p-5 pt-0 text-gray-600 leading-relaxed border-t border-gray-100" x-cloak>
+                        Yes, our medicines are made from 100% natural ingredients, primarily Himalayan herbs, minerals, and plants, prepared according to ancient pharmacological texts.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 px-6 bg-medical-dark text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div>
+                    <h2 class="text-4xl font-bold mb-4">What Our Patients Say</h2>
+                    <p class="text-white/60">Real stories from people who found healing at our clinic.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-white/10 px-6 py-3 rounded-xl border border-white/10">
+                    <div class="flex text-yellow-400">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <span class="font-bold text-xl">4.8/5</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 relative group hover:bg-white/10 transition-all">
+                    <i data-lucide="quote" class="text-white/10 absolute top-6 right-6 w-10 h-10"></i>
+                    <p class="text-lg italic mb-8 relative z-10">"Very impressive and great service given by the doctor"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-medical-blue rounded-full flex items-center justify-center font-bold">A</div>
+                        <div class="font-bold tracking-wide">Amit Singh</div>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 relative group hover:bg-white/10 transition-all">
+                    <i data-lucide="quote" class="text-white/10 absolute top-6 right-6 w-10 h-10"></i>
+                    <p class="text-lg italic mb-8 relative z-10">"Fixed my stomach bug problem that other medicines and doctors couldn't."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-medical-blue rounded-full flex items-center justify-center font-bold">A</div>
+                        <div class="font-bold tracking-wide">Abhishek Dhar</div>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 relative group hover:bg-white/10 transition-all">
+                    <i data-lucide="quote" class="text-white/10 absolute top-6 right-6 w-10 h-10"></i>
+                    <p class="text-lg italic mb-8 relative z-10">"Thanks dr dolma..you give me a new life"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-medical-blue rounded-full flex items-center justify-center font-bold">A</div>
+                        <div class="font-bold tracking-wide">amanjit Kaur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20">
+                <div>
+                    <div class="text-medical-blue font-bold uppercase tracking-[0.2em] text-xs mb-4">Contact Us</div>
+                    <h2 class="text-4xl md:text-5xl font-black text-medical-dark mb-8">Let's Talk About Your Health</h2>
+                    <p class="text-gray-500 text-lg mb-12 leading-relaxed">Our team is here to help you on your journey to wellness. Whether you have a specific health concern or just want to learn more about Tibetan medicine, we're ready to assist.</p>
+                    
+                    <div class="space-y-10">
+                        <div class="flex gap-8 items-start group">
+                            <div class="w-16 h-16 bg-medical-light rounded-2xl flex items-center justify-center text-medical-blue shrink-0 shadow-sm group-hover:bg-medical-blue group-hover:text-white transition-all duration-300">
+                                <i data-lucide="map-pin" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-medical-dark text-xl mb-2">Our Location</h4>
+                                <p class="text-gray-500 leading-relaxed">Dolma Chowk, McLeod Ganj, Dharamshala,<br>Himachal Pradesh 176215</p>
+                                <a href="#" class="text-medical-blue font-bold text-sm mt-3 inline-block hover:underline">Get Directions</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 items-start group">
+                            <div class="w-16 h-16 bg-medical-light rounded-2xl flex items-center justify-center text-medical-blue shrink-0 shadow-sm group-hover:bg-medical-blue group-hover:text-white transition-all duration-300">
+                                <i data-lucide="phone" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-medical-dark text-xl mb-2">Call Us Directly</h4>
+                                <p class="text-gray-500 text-lg">075900 32466</p>
+                                <p class="text-medical-blue font-bold text-sm mt-1">Available Mon-Sat, 9am - 5pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-medical-blue/5 rounded-[3rem] -z-10"></div>
+                    <div class="bg-white p-12 rounded-[2.5rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.08)] border border-gray-100">
+                        <h3 class="text-3xl font-bold text-medical-dark mb-10">Send an Inquiry</h3>
+                        <form class="space-y-8" onsubmit="event.preventDefault()">
+                            <div class="space-y-3">
+                                <label class="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">Full Name</label>
+                                <input type="text" class="w-full bg-medical-bg/50 border-2 border-transparent rounded-2xl p-5 focus:bg-white focus:border-medical-blue/20 outline-none transition-all" placeholder="John Doe">
+                            </div>
+                            <div class="space-y-3">
+                                <label class="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">Phone Number</label>
+                                <input type="tel" class="w-full bg-medical-bg/50 border-2 border-transparent rounded-2xl p-5 focus:bg-white focus:border-medical-blue/20 outline-none transition-all" placeholder="+91 00000 00000">
+                            </div>
+                            <div class="space-y-3">
+                                <label class="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">Your Message</label>
+                                <textarea rows="4" class="w-full bg-medical-bg/50 border-2 border-transparent rounded-2xl p-5 focus:bg-white focus:border-medical-blue/20 outline-none transition-all resize-none" placeholder="Tell us how we can help..."></textarea>
+                            </div>
+                            <button class="w-full bg-medical-blue text-white py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-sm hover:bg-medical-dark transition-all shadow-2xl shadow-medical-blue/30 active:scale-[0.98]">Submit Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-medical-dark text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-12 mb-12 border-b border-white/10 pb-12">
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-medical-blue rounded-lg flex items-center justify-center text-white">
+                            <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xl font-bold">Dolma Clinic</span>
+                    </div>
+                    <p class="text-white/50 text-sm leading-relaxed">Traditional Tibetan Herbal Medicine clinic continuing the legacy of Dr. Lobsang Dolma Khangkar in McLeod Ganj.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 uppercase tracking-widest text-xs text-medical-blue">Quick Links</h4>
+                    <ul class="space-y-4 text-sm text-white/70">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Our Services</a></li>
+                        <li><a href="#gallery" class="hover:text-white transition-colors">Gallery</a></li>
+                        <li><a href="#faqs" class="hover:text-white transition-colors">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 uppercase tracking-widest text-xs text-medical-blue">Contact Info</h4>
+                    <ul class="space-y-4 text-sm text-white/70">
+                        <li class="flex items-center gap-3"><i data-lucide="map-pin" class="text-medical-blue w-4 h-4"></i> Dolma Chowk, McLeod Ganj</li>
+                        <li class="flex items-center gap-3"><i data-lucide="phone" class="text-medical-blue w-4 h-4"></i> 075900 32466</li>
+                        <li class="flex items-center gap-3"><i data-lucide="clock" class="text-medical-blue w-4 h-4"></i> Mon - Sat: 9:00 - 17:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-white/40 text-[10px] uppercase tracking-[0.3em] font-bold">
+                <div>© 2026 Dr. Lobsang Dolma Khangkar Memorial Clinic</div>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
